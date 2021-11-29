@@ -10,9 +10,12 @@ namespace RentACarWebSite.Models
     {
         [Key]
         public int MemberID { get; set; }
+        [Required]
+        public string MemberMail { get; set; }
+        [Required]
         public string MemberPass { get; set; }
         public string MemberName { get; set; }
         public string MemberLastName { get; set; }
-        public string MemberMail { get; set; }
+        
     }
 }

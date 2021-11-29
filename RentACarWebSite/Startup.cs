@@ -54,7 +54,7 @@ namespace RentACarWebSite
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Members}/{action=Index}/{id?}");
             });
         }
     }

@@ -10,9 +10,10 @@ namespace RentACarWebSite.Models
     {
         [Key]
         public int AdminID { get; set; }
-        public string AdminPass { get; set; }
+        [Required]
         public string AdminMail { get; set; }
-        public int MyProperty { get; set; }
+        [Required]
+        public string AdminPass { get; set; }
         public ICollection<Cars> Cars { get; set; }
     }
 }
