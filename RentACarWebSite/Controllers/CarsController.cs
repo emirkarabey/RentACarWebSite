@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RentACarWebSite.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace RentACarWebSite.Controllers
         {
             context = ctx;
         }
-
+        
         public IActionResult Index()
         {
             List<Cars> list = context.Cars.ToList();
@@ -59,10 +60,16 @@ namespace RentACarWebSite.Controllers
             cr.CarFoto = car.CarFoto;
             cr.CarModel = car.CarModel;
             cr.CarYear = car.CarYear;
-            cr.CarKm = car.CarKm;
+            cr.CarMarka = car.CarMarka;
             cr.CarColor = car.CarColor;
             context.SaveChanges();
             return RedirectToAction("Index");
+        }
+       
+        public IActionResult CarsList()
+        {
+            List<Cars> list = context.Cars.ToList();
+            return View(list);
         }
     }
 }

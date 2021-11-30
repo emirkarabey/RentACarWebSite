@@ -14,7 +14,7 @@ namespace RentACarWebSite.Models
         public int CarYear { get; set; }
         public int Price { get; set; }
         public string CarModel { get; set; }
-        public int CarKm { get; set; }
+        public string CarMarka { get; set; }
         public string CarColor { get; set; }
         public Admin Admin { get; set; }
     }

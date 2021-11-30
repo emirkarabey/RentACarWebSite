@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +28,25 @@ namespace RentACarWebSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllersWithViews();
             var connection = @"server=.;database=RentACar;trusted_connection=true;";
             object p = services.AddDbContext<RentACarContext>(obtions => obtions.UseSqlServer(connection));
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+                {
+                    x.LoginPath = "/Account/SignInMembers";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +64,9 @@ namespace RentACarWebSite
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -54,7 +75,7 @@ namespace RentACarWebSite
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Members}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
