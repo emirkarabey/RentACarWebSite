@@ -56,6 +56,31 @@ namespace RentACarWebSite.Controllers
             }
 
         }
+        [HttpGet, AllowAnonymous]
+        public IActionResult SignInAdmin()
+        {
+            return View();
+        }
+        [HttpPost, AllowAnonymous]
+        public async Task<IActionResult> SignInAdmin(Admin admin)
+        {
+            var datavalue = context.Admin.FirstOrDefault(x => x.AdminMail == admin.AdminMail && x.AdminPass == admin.AdminPass);
+            if (datavalue != null)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,admin.AdminMail)
+                };
+                var useridentity = new ClaimsIdentity(claims, "a");
+                ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(principal);
+                return RedirectToAction("CarsList", "Cars");
+            }
+            else
+            {
+                return View();
+            }
+        }
         public async Task<IActionResult> Register(Members member)
         {
             await context.AddAsync(member);

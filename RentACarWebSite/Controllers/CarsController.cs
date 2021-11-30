@@ -71,5 +71,10 @@ namespace RentACarWebSite.Controllers
             List<Cars> list = context.Cars.ToList();
             return View(list);
         }
+        public IActionResult CarsListNotSignIn()
+        {
+            List<Cars> list = context.Cars.ToList();
+            return View(list);
+        }
     }
 }
