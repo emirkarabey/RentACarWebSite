@@ -87,5 +87,11 @@ namespace RentACarWebSite.Controllers
             await context.SaveChangesAsync();
             return Redirect("/Home/Index");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("CarsListNotSignIn","Cars");
+        }
     }
 }

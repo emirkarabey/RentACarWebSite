@@ -12,6 +12,8 @@ namespace RentACarWebSite.Models
         public DbSet<Cars> Cars { get; set; }
         public DbSet<Rent> Rent { get; set; }
         public DbSet<Admin> Admin { get; set; }
+      
+
         public RentACarContext(DbContextOptions<RentACarContext> options) : base(options)
         {
 

@@ -16,9 +16,11 @@ namespace RentACarWebSite.Controllers
             context = ctx;
         }
         
-        public IActionResult Index()
+        [AllowAnonymous,HttpPost]
+        public IActionResult Index(string carMarka)
         {
             List<Cars> list = context.Cars.ToList();
+            ViewBag.SelectMarka = carMarka;
             return View(list);
         }
 
@@ -71,9 +73,14 @@ namespace RentACarWebSite.Controllers
             List<Cars> list = context.Cars.ToList();
             return View(list);
         }
-        public IActionResult CarsListNotSignIn()
+        [AllowAnonymous]
+        public IActionResult CarsListNotSignIn(string? carMarka)
         {
             List<Cars> list = context.Cars.ToList();
+            if (carMarka!=null)
+            {
+                ViewBag.SelectMarka = carMarka;
+            }
             return View(list);
         }
     }

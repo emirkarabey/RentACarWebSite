@@ -17,5 +17,6 @@ namespace RentACarWebSite.Models
         public string CarMarka { get; set; }
         public string CarColor { get; set; }
         public Admin Admin { get; set; }
+        
     }
 }
