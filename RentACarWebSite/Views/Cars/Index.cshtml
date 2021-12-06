@@ -7,6 +7,18 @@
 
 <h1>Index</h1>
 
+<div class="form-group">
+    <label>Sıralama</label>
+    <form asp-controller="Cars" asp-action="Index" method="get">
+        <select class="form-control" name="sirala">
+            <option>Seçiniz...</option>
+            <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
+            <option value="Artan">Fiyat Düşükten Yükseğe</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
 <div class="row">
 
     <div class="col-2 card" style="width: 150px; height:400px; display: inline-block;">

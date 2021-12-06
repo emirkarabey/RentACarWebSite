@@ -16,10 +16,67 @@ namespace RentACarWebSite.Controllers
             context = ctx;
         }
         [AllowAnonymous,HttpGet]
-        public IActionResult Index(int id)
+        public IActionResult Index(int?id,string?sirala)
         {
-            List<Cars> list = context.Cars.Where(x => x.MarkaId == id).ToList();
-            return View("Index", list);
+            if (id!=null)
+            {
+                if (id==2000)
+                {
+                    if (sirala != null)
+                    {
+                        if (sirala.Equals("Artan"))
+                        {
+                            List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
+                            return View("Index", list);
+                        }
+                        else if (sirala.Equals("Azalan"))
+                        {
+                            List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
+                            return View("Index", list);
+                        }
+
+                    }
+                    else
+                    {
+                        List<Cars> list = context.Cars.ToList();
+                        return View("Index", list);
+                    }
+                }
+                if (sirala!=null)
+                {
+                    if (sirala.Equals("Artan"))
+                    {
+                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderBy(x => x.Price).ToList();
+                        return View("Index", list);
+                    }
+                    else if (sirala.Equals("Azalan"))
+                    {
+                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderByDescending(x => x.Price).ToList();
+                        return View("Index", list);
+                    }
+                    
+                }
+                else
+                {
+                    List<Cars> list = context.Cars.Where(x => x.MarkaId == id).ToList();
+                    return View("Index", list);
+                }
+            }
+            else
+            {
+                if (sirala.Equals("Artan"))
+                {
+                    List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
+                    return View("Index", list);
+                }
+                else if (sirala.Equals("Azalan"))
+                {
+                    List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
+                    return View("Index", list);
+                }
+            }
+
+            return View();
         }
 
         [AllowAnonymous,HttpPost]

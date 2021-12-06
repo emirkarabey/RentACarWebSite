@@ -7,10 +7,21 @@
 
 <h1>CarsListNotSignIn</h1>
 
+<div class="form-group">
+    <label>Sıralama</label>
+    <form asp-controller="Cars" asp-action="Index" method="get">
+        <select class="form-control" name="sirala" >
+            <option>Seçiniz...</option>
+            <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
+            <option value="Artan">Fiyat Düşükten Yükseğe</option>
+        </select>
+        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value="Submit"></center>
+    </form>
+</div>
 <div class="row">
 
     <div class="col-2 card" style="width: 150px; height:400px; display: inline-block;">
-       
+
 
         @await Component.InvokeAsync("MarkaList")
 
@@ -18,7 +29,7 @@
 
     </div>
     <div class="col-10" style="display:inline-block">
-      
+
 
         @foreach (var item in Model)
         {
