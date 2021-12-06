@@ -15,12 +15,17 @@ namespace RentACarWebSite.Controllers
         {
             context = ctx;
         }
-        
+        [AllowAnonymous,HttpGet]
+        public IActionResult Index(int id)
+        {
+            List<Cars> list = context.Cars.Where(x => x.MarkaId == id).ToList();
+            return View("Index", list);
+        }
+
         [AllowAnonymous,HttpPost]
-        public IActionResult Index(string carMarka)
+        public IActionResult Index()
         {
             List<Cars> list = context.Cars.ToList();
-            ViewBag.SelectMarka = carMarka;
             return View(list);
         }
 
@@ -62,7 +67,7 @@ namespace RentACarWebSite.Controllers
             cr.CarFoto = car.CarFoto;
             cr.CarModel = car.CarModel;
             cr.CarYear = car.CarYear;
-            cr.CarMarka = car.CarMarka;
+            
             cr.CarColor = car.CarColor;
             context.SaveChanges();
             return RedirectToAction("Index");
@@ -74,13 +79,9 @@ namespace RentACarWebSite.Controllers
             return View(list);
         }
         [AllowAnonymous]
-        public IActionResult CarsListNotSignIn(string? carMarka)
+        public IActionResult CarsListNotSignIn()
         {
             List<Cars> list = context.Cars.ToList();
-            if (carMarka!=null)
-            {
-                ViewBag.SelectMarka = carMarka;
-            }
             return View(list);
         }
     }
