@@ -41,6 +41,7 @@ namespace RentACarWebSite.Controllers
             var datavalue = context.Members.FirstOrDefault(x => x.MemberMail == member.MemberMail && x.MemberPass == member.MemberPass);
             if (datavalue!=null)
             {
+                TempData["value"] = "Member";
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,member.MemberMail)
@@ -48,6 +49,7 @@ namespace RentACarWebSite.Controllers
                 var useridentity = new ClaimsIdentity(claims, "a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
+                
                 return RedirectToAction("CarsList", "Cars");
             }
             else
@@ -74,6 +76,7 @@ namespace RentACarWebSite.Controllers
                 var useridentity = new ClaimsIdentity(claims, "a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
+                TempData["value"] = "Admin";
                 return RedirectToAction("CarsList", "Cars");
             }
             else

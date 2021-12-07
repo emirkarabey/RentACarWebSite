@@ -2,7 +2,15 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    @if (User.Identity.IsAuthenticated) { 
+
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    }else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
 }
 
 <h1>Index</h1>
@@ -15,7 +23,7 @@
             <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
             <option value="Artan">Fiyat Düşükten Yükseğe</option>
         </select>
-        <input type="submit" value="Submit">
+        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value="Submit"></center>
     </form>
 </div>
 
@@ -42,6 +50,10 @@
                         Car Year: @Html.DisplayFor(modelItem => item.CarYear)<br />
                         Car Color: @Html.DisplayFor(modelItem => item.CarColor)
                     </p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="#" class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) TL/Day Rent Now</a>
+                    }
 
                 </div>
             </div>

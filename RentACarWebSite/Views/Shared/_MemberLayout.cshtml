@@ -1,4 +1,5 @@
 ﻿
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
 
 <body style="background-color: #17a2b8">
     <header style="background-color: #e3f2fd;">
-        <nav class="navbar-toggleable navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd">
+        <nav class="navbar-toggleable navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd;">
             <a class="navbar-brand" href="#">Rent A Car Web Site</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,30 +25,11 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Members
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="Members" asp-action="Index">Members List</a>
-                            <a class="dropdown-item" asp-controller="Members" asp-action="Create">Create</a>
-
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cars
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="Cars" asp-action="CarsList">Cars</a>
-                            <a class="dropdown-item" asp-controller="Cars" asp-action="Create">Create</a>
-                            <a class="dropdown-item" asp-controller="Cars" asp-action="Cars">Car List</a>
-                        </div>
-                    </li>
-
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Rent" asp-action="">Rent</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CarsList">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Rent" asp-action="Index">Rent</a>
                     </li>
                     <li class="nav-item" style="position:absolute;right:130px">
                         Welcome @User.Identity.Name
@@ -58,10 +40,12 @@
                             <a class="btn btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="Logout" style="position:absolute;right:20px">Logout</a>
                         </li>
                     }
-                </ul>  
+
+                </ul>
+                
             </div>
         </nav>
-        
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

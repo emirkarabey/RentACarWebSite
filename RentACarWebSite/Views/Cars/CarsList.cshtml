@@ -2,24 +2,58 @@
 
 @{
     ViewData["Title"] = "CarsList";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string authority = TempData["value"].ToString();
+   
+    if (authority.Equals("Admin"))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else if (authority.Equals("Member"))
+    {
+        Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    }
+
 }
 
 <h1>CarsList</h1>
+<h1>@TempData["name"]</h1>
+<div class="form-group">
+    <label>Sıralama</label>
+    <form asp-controller="Cars" asp-action="Index" method="get">
+        <select class="form-control" name="sirala">
+            <option>Seçiniz...</option>
+            <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
+            <option value="Artan">Fiyat Düşükten Yükseğe</option>
+        </select>
+        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value="Submit"></center>
+    </form>
+</div>
+<div class="row">
 
-    
-    @foreach (var item in Model)
-    {
-        <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px">
-            <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.CarFoto)>
-            <div class="card-body">
-                @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.CarMarka) @Html.DisplayFor(modelItem => item.CarModel)</h5>*@
-                <p class="card-text">
-                    Car Year: @Html.DisplayFor(modelItem => item.CarYear)<br />
-                    Car Color: @Html.DisplayFor(modelItem => item.CarColor)
-                </p>
-                <a href="#" class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) TL/Day Rent Now</a>
+    <div class="col-2 card" style="width: 150px; height:400px; display: inline-block;">
+
+
+        @await Component.InvokeAsync("MarkaList")
+
+
+
+    </div>
+    <div class="col-10" style="display:inline-block">
+
+
+        @foreach (var item in Model)
+        {
+            <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px">
+                <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.CarFoto)>
+                <div class="card-body">
+                    @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.CarMarka) @Html.DisplayFor(modelItem => item.CarModel)</h5>*@
+                    <p class="card-text">
+                        Car Year: @Html.DisplayFor(modelItem => item.CarYear)<br />
+                        Car Color: @Html.DisplayFor(modelItem => item.CarColor)
+                    </p>
+                    <a asp-controller="Rent" asp-action="RentCar" asp-route-id="@item.CarID"  class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) TL/Day Rent Now</a>
+                </div>
             </div>
-        </div>
-    }
-
+        }
+    </div>
+</div>

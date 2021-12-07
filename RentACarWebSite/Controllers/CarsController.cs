@@ -18,9 +18,9 @@ namespace RentACarWebSite.Controllers
         [AllowAnonymous,HttpGet]
         public IActionResult Index(int?id,string?sirala)
         {
-            if (id!=null)
+            if (id != null)
             {
-                if (id==2000)
+                if (id == 2000)
                 {
                     if (sirala != null)
                     {
@@ -42,7 +42,7 @@ namespace RentACarWebSite.Controllers
                         return View("Index", list);
                     }
                 }
-                if (sirala!=null)
+                if (sirala != null)
                 {
                     if (sirala.Equals("Artan"))
                     {
@@ -54,7 +54,7 @@ namespace RentACarWebSite.Controllers
                         List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderByDescending(x => x.Price).ToList();
                         return View("Index", list);
                     }
-                    
+
                 }
                 else
                 {
@@ -75,7 +75,6 @@ namespace RentACarWebSite.Controllers
                     return View("Index", list);
                 }
             }
-
             return View();
         }
 
@@ -94,13 +93,15 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public IActionResult Create(Cars cars)
         {
+            TempData["value"] = "Admin";
             context.Cars.Add(cars);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("CarsList");
         }
 
         public IActionResult Delete(int id)
         {
+            TempData["value"] = "Admin";
             var car = context.Cars.Find(id);
             context.Cars.Remove(car);
             context.SaveChanges();
@@ -109,6 +110,7 @@ namespace RentACarWebSite.Controllers
 
         public IActionResult Details(int id)
         {
+            TempData["value"] = "Admin";
             var detay = context.Cars.Find(id);
             return View(detay);
         }
@@ -120,6 +122,7 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Cars car)
         {
+            TempData["value"] = "Admin";
             var cr = context.Cars.Find(id);
             cr.CarFoto = car.CarFoto;
             cr.CarModel = car.CarModel;
@@ -138,6 +141,13 @@ namespace RentACarWebSite.Controllers
         [AllowAnonymous]
         public IActionResult CarsListNotSignIn()
         {
+            List<Cars> list = context.Cars.ToList();
+            return View(list);
+        }
+
+        public IActionResult Cars()
+        {
+
             List<Cars> list = context.Cars.ToList();
             return View(list);
         }
