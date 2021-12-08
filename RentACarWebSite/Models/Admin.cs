@@ -14,6 +14,7 @@ namespace RentACarWebSite.Models
         public string AdminMail { get; set; }
         [Required]
         public string AdminPass { get; set; }
+        public string Rol { get; set; }
         public ICollection<Cars> Cars { get; set; }
     }
 }

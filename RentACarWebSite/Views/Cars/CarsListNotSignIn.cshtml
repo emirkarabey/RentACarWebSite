@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RentACarWebSite.Models.Cars>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model IEnumerable<RentACarWebSite.Models.Cars>
 
 @{
     ViewData["Title"] = "CarsListNotSignIn";
@@ -8,14 +9,14 @@
 <h1>CarsListNotSignIn</h1>
 
 <div class="form-group">
-    <label>Sıralama</label>
+    <label>@localizer["Sirala"]</label>
     <form asp-controller="Cars" asp-action="Index" method="get">
         <select class="form-control" name="sirala" >
-            <option>Seçiniz...</option>
-            <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
-            <option value="Artan">Fiyat Düşükten Yükseğe</option>
+            <option>@localizer["Seciniz"]</option>
+            <option value="Azalan">@localizer["FiyatArtan"]</option>
+            <option value="Artan">@localizer["FiyatAzalan"]</option>
         </select>
-        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value="Submit"></center>
+        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value=@localizer["SubmitBtn"]></center>
     </form>
 </div>
 <div class="row">
@@ -33,18 +34,17 @@
 
         @foreach (var item in Model)
         {
+        <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px;height:auto">
+            <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.CarFoto)>
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.CarModel)</h5>
+                <p class="card-text">
+                    @localizer["CarYear"]: @Html.DisplayFor(modelItem => item.CarYear)<br />
+                    @localizer["CarColor"]: @Html.DisplayFor(modelItem => item.CarColor)
+                </p>
 
-            <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px;height:auto">
-                <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.CarFoto)>
-                <div class="card-body">
-                    @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.CarMarka) @Html.DisplayFor(modelItem => item.CarModel)</h5>*@
-                    <p class="card-text">
-                        Car Year: @Html.DisplayFor(modelItem => item.CarYear)<br />
-                        Car Color: @Html.DisplayFor(modelItem => item.CarColor)
-                    </p>
-
-                </div>
             </div>
+        </div>
         }
     </div>
 </div>

@@ -31,6 +31,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Rent" asp-action="Index">Rent</a>
                     </li>
+
+                    <li class="nav-link">
+                        <partial name="_Culture" />
+                    </li>
+
                     <li class="nav-item" style="position:absolute;right:130px">
                         Welcome @User.Identity.Name
                     </li>

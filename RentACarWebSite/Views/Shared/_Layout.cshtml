@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,18 +20,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CarsListNotSignIn">Cars</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CarsListNotSignIn">@localizer["Cars"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="SignUpMembers" style="position:absolute;right:339px">Sign up</a>
+                            <a class="btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="SignUpMembers" style="position:absolute;right:339px">@localizer["SignUp"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="SignInMembers" style="position:absolute;right:168px">Sign In Members</a>
+                            <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="SignInMembers" style="position:absolute;right:168px">@localizer["SignInMem"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-info" asp-area="" asp-controller="Account" asp-action="SignInAdmin" style="position:absolute;right:20px">Sign In Admin</a>
+                            <a class="btn btn-outline-info" asp-area="" asp-controller="Account" asp-action="SignInAdmin" style="position:absolute;right:20px">@localizer["SignInAdmin"]</a>
                         </li>
-                        
+                        <li class="nav-link">
+                            <partial name="_Culture" />
+                        </li>
 
                     </ul>
                 </div>

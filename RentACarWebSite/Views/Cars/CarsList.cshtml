@@ -1,14 +1,16 @@
-﻿@model IEnumerable<RentACarWebSite.Models.Cars>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model IEnumerable<RentACarWebSite.Models.Cars>
 
 @{
     ViewData["Title"] = "CarsList";
     string authority = TempData["value"].ToString();
-   
-    if (authority.Equals("Admin"))
+
+
+    if (authority.Equals("A"))
     {
         Layout = "~/Views/Shared/_AdminLayout.cshtml";
     }
-    else if (authority.Equals("Member"))
+    else if (authority.Equals("B"))
     {
         Layout = "~/Views/Shared/_MemberLayout.cshtml";
     }
@@ -18,14 +20,14 @@
 <h1>CarsList</h1>
 <h1>@TempData["name"]</h1>
 <div class="form-group">
-    <label>Sıralama</label>
+    <label>@localizer["Sirala"]</label>
     <form asp-controller="Cars" asp-action="Index" method="get">
         <select class="form-control" name="sirala">
-            <option>Seçiniz...</option>
-            <option value="Azalan">Fiyat Yüksekten Düşüğe</option>
-            <option value="Artan">Fiyat Düşükten Yükseğe</option>
+            <option>@localizer["Seciniz"]</option>
+            <option value="Azalan">@localizer["FiyatArtan"]</option>
+            <option value="Artan">@localizer["FiyatAzalan"]</option>
         </select>
-        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value="Submit"></center>
+        <center><input style=" margin-left: auto; margin-right: auto;" class="btn btn-primary" type="submit" value=@localizer["SubmitBtn"]></center>
     </form>
 </div>
 <div class="row">
@@ -48,10 +50,10 @@
                 <div class="card-body">
                     @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.CarMarka) @Html.DisplayFor(modelItem => item.CarModel)</h5>*@
                     <p class="card-text">
-                        Car Year: @Html.DisplayFor(modelItem => item.CarYear)<br />
-                        Car Color: @Html.DisplayFor(modelItem => item.CarColor)
+                        @localizer["CarYear"]: @Html.DisplayFor(modelItem => item.CarYear)<br />
+                        @localizer["CarColor"]: @Html.DisplayFor(modelItem => item.CarColor)
                     </p>
-                    <a asp-controller="Rent" asp-action="RentCar" asp-route-id="@item.CarID"  class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) TL/Day Rent Now</a>
+                    <a asp-controller="Rent" asp-action="RentCar" asp-route-id="@item.CarID" class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) @localizer["RentNow"]</a>
                 </div>
             </div>
         }

@@ -16,6 +16,7 @@ namespace RentACarWebSite.Models
         public string MemberPass { get; set; }
         public string MemberName { get; set; }
         public string MemberLastName { get; set; }
-        
+        public string Rol { get; set; }
+
     }
 }

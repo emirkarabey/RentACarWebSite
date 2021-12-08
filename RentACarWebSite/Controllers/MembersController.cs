@@ -29,7 +29,9 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public IActionResult Create(Members member)
         {
+            member.Rol = "B";
             context.Members.Add(member);
+
             context.SaveChanges();
             return RedirectToAction("Index");
         }

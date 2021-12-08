@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RentACarWebSite.Models.Rent>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model IEnumerable<RentACarWebSite.Models.Rent>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,48 +8,46 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RentDate)
+                @localizer["RentDate"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Admin)
+                @localizer["Admin"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car)
+                @localizer["Car"]
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Member)
+                @localizer["Member"]
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Admin.AdminMail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Car.CarID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Member.MemberMail)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            @if (item.Member.MemberMail.Equals(User.Identity.Name))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Admin.AdminMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.CarID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Member.MemberMail)
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

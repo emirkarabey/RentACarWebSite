@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using RentACarWebSite.Models;
 using System;
 using System.Collections.Generic;
@@ -10,11 +13,34 @@ namespace RentACarWebSite.Controllers
 {
     public class CarsController : Controller
     {
+        private readonly IHtmlLocalizer<HomeController> _localizer;
+
         private readonly RentACarContext context;
-        public CarsController(RentACarContext ctx)
+        public CarsController(RentACarContext ctx, IHtmlLocalizer<HomeController> localizer)
         {
             context = ctx;
+            _localizer = localizer;
         }
+
+        [HttpPost,AllowAnonymous]
+        public IActionResult CultureManagement(string culture, string returnUrl)
+        {
+            var memberMail = User.Identity.Name;
+            var memberRol = context.Members.Where(x => x.MemberMail == memberMail).Select(x => x.Rol).FirstOrDefault();
+            if (memberRol.Equals("B"))
+            {
+                TempData["value"] = memberRol;
+            }
+            else
+            {
+                TempData["value"] = "A";
+            }
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) });
+
+            return LocalRedirect(returnUrl);
+        }
+
         [AllowAnonymous,HttpGet]
         public IActionResult Index(int?id,string?sirala)
         {
@@ -93,7 +119,7 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public IActionResult Create(Cars cars)
         {
-            TempData["value"] = "Admin";
+            TempData["value"] = "A";
             context.Cars.Add(cars);
             context.SaveChanges();
             return RedirectToAction("CarsList");
@@ -101,7 +127,7 @@ namespace RentACarWebSite.Controllers
 
         public IActionResult Delete(int id)
         {
-            TempData["value"] = "Admin";
+            TempData["value"] = "A";
             var car = context.Cars.Find(id);
             context.Cars.Remove(car);
             context.SaveChanges();
@@ -110,7 +136,7 @@ namespace RentACarWebSite.Controllers
 
         public IActionResult Details(int id)
         {
-            TempData["value"] = "Admin";
+            TempData["value"] = "A";
             var detay = context.Cars.Find(id);
             return View(detay);
         }
@@ -122,7 +148,7 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Cars car)
         {
-            TempData["value"] = "Admin";
+            TempData["value"] = "A";
             var cr = context.Cars.Find(id);
             cr.CarFoto = car.CarFoto;
             cr.CarModel = car.CarModel;
@@ -135,6 +161,17 @@ namespace RentACarWebSite.Controllers
        
         public IActionResult CarsList()
         {
+            var memberMail = User.Identity.Name;
+            var memberRol = context.Members.Where(x => x.MemberMail == memberMail).Select(x=>x.Rol).FirstOrDefault();
+            if (memberRol=="B")
+            {
+                TempData["value"] = "B";
+            }
+            else
+            {
+                TempData["value"] = "A";
+            }
+            
             List<Cars> list = context.Cars.ToList();
             return View(list);
         }
