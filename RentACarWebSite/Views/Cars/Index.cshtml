@@ -2,13 +2,21 @@
 
 @{
     ViewData["Title"] = "Index";
-    @if (User.Identity.IsAuthenticated) { 
+    string authority = TempData["value"].ToString();
 
+
+    if (authority.Equals("A"))
+    {
         Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
-    }else
+    }
+    else if (authority.Equals("B"))
+    {
+        Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    }
+    else
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
+
     }
 
 }

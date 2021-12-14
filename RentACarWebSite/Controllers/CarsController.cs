@@ -21,15 +21,19 @@ namespace RentACarWebSite.Controllers
             context = ctx;
             _localizer = localizer;
         }
-
+        // ajaxı tamamla 
         [HttpPost,AllowAnonymous]
         public IActionResult CultureManagement(string culture, string returnUrl)
         {
             var memberMail = User.Identity.Name;
             var memberRol = context.Members.Where(x => x.MemberMail == memberMail).Select(x => x.Rol).FirstOrDefault();
-            if (memberRol.Equals("B"))
+            if (memberRol == "B")
             {
-                TempData["value"] = memberRol;
+                TempData["value"] = "B";
+            }
+            else if (!User.Identity.IsAuthenticated)
+            {
+                TempData["value"] = "C";
             }
             else
             {
@@ -44,64 +48,76 @@ namespace RentACarWebSite.Controllers
         [AllowAnonymous,HttpGet]
         public IActionResult Index(int?id,string?sirala)
         {
+            var memberMail = User.Identity.Name;
+            var memberRol = context.Members.Where(x => x.MemberMail == memberMail).Select(x => x.Rol).FirstOrDefault();
+            if (memberRol == "B")
+            {
+                TempData["value"] = "B";
+            }else if (!User.Identity.IsAuthenticated)
+            {
+                TempData["value"]="C";
+            }
+            else
+            {
+                TempData["value"] = "A";
+            }
+
             if (id != null)
             {
-                if (id == 2000)
+                if (id == 0)
                 {
                     if (sirala != null)
                     {
                         if (sirala.Equals("Artan"))
                         {
-                            List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
-                            return View("Index", list);
+                            List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
+                            return View("CarsList", list);
                         }
                         else if (sirala.Equals("Azalan"))
                         {
-                            List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
-                            return View("Index", list);
+                            List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
+                            return View("CarsList", list);
                         }
-
                     }
                     else
                     {
                         List<Cars> list = context.Cars.ToList();
-                        return View("Index", list);
+                        return View("CarsList", list);
                     }
                 }
                 if (sirala != null)
                 {
                     if (sirala.Equals("Artan"))
                     {
-                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderBy(x => x.Price).ToList();
-                        return View("Index", list);
+                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderByDescending(x => x.Price).ToList();
+                        return View("CarsList", list);
                     }
                     else if (sirala.Equals("Azalan"))
                     {
-                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderByDescending(x => x.Price).ToList();
-                        return View("Index", list);
+                        List<Cars> list = context.Cars.Where(x => x.MarkaId == id).OrderBy(x => x.Price).ToList();
+                        return View("CarsList", list);
                     }
-
                 }
                 else
                 {
                     List<Cars> list = context.Cars.Where(x => x.MarkaId == id).ToList();
-                    return View("Index", list);
+                    return View("CarsList", list);
                 }
             }
             else
             {
                 if (sirala.Equals("Artan"))
                 {
-                    List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
-                    return View("Index", list);
+                    List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
+                    return View("CarsList", list);
                 }
                 else if (sirala.Equals("Azalan"))
                 {
-                    List<Cars> list = context.Cars.OrderByDescending(x => x.Price).ToList();
-                    return View("Index", list);
+                    List<Cars> list = context.Cars.OrderBy(x => x.Price).ToList();
+                    return View("CarsList", list);
                 }
             }
-            return View();
+            return View("CarsList");
         }
 
         [AllowAnonymous,HttpPost]

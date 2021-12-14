@@ -1,2 +1,43 @@
 ﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="row">
+
+    <div id="tablo" class="col-md-6">
+
+    </div>
+
+    <div id=" kullaniciDetay" class="col-md-6">
+
+    </div>
+    <div id=" kullaniciEkle" class="col-md-12">
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/AjaxDeneme/GetirHepsi',
+                contentType: 'application/json;charset=utf-8',
+                type: 'Get',
+                dataType: 'json',
+                success: function (data) {
+                    var objeyeCevrildi = jQuery.parseJSON(data);
+                    console.log(objeyeCevrildi);
+
+                    let table = `<table class='table table -bordered table-sm'>
+                    <tr> <th>Id </th> <th>Ad </th>`
+                    $each(objeyeCevrildi, (index, value) => {
+                        table += `<tr> <td>${value.MemberId} </td> <td>${value.MemberName} </td> </tr>`
+                    });
+                    table += `</table>`;
+                    $("#tablo").html(table);
+                }
+            })
+        })
+
+    </script>
+
+}

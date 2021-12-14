@@ -41,9 +41,10 @@ namespace RentACarWebSite.Controllers
             context.Rent.Add(rent);
             context.SaveChanges();
             var car = context.Cars.Find(id);
-            context.Cars.Remove(car);
-            context.SaveChanges();
-            return RedirectToAction("CarsList", "Cars");
+            TempData["price"] = car.Price.ToString();
+            //context.Cars.Remove(car);
+            //context.SaveChanges();
+            return RedirectToAction("Index", "Ajax");
         }
 
         
