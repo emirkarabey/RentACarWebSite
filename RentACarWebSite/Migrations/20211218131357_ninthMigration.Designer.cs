@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentACarWebSite.Models;
 
 namespace RentACarWebSite.Migrations
 {
     [DbContext(typeof(RentACarContext))]
-    partial class RentACarContextModelSnapshot : ModelSnapshot
+    [Migration("20211218131357_ninthMigration")]
+    partial class ninthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,10 +127,8 @@ namespace RentACarWebSite.Migrations
 
             modelBuilder.Entity("RentACarWebSite.Models.PaymentModel", b =>
                 {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CardNo")
                         .HasColumnType("nvarchar(max)");
@@ -136,10 +136,7 @@ namespace RentACarWebSite.Migrations
                     b.Property<string>("DateTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PaymentId");
+                    b.HasKey("Name");
 
                     b.ToTable("PaymentModel");
                 });

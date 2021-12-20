@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace RentACarWebSite.Controllers
 {
+    
     public class CarsController : Controller
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
@@ -130,11 +131,16 @@ namespace RentACarWebSite.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            
+           
+           
             return View();
         }
-        [HttpPost]
+        [HttpPost]/////rol denemesi
         public IActionResult Create(Cars cars)
         {
+           
+            
             TempData["value"] = "A";
             context.Cars.Add(cars);
             context.SaveChanges();
@@ -200,7 +206,7 @@ namespace RentACarWebSite.Controllers
 
         public IActionResult Cars()
         {
-
+            
             List<Cars> list = context.Cars.ToList();
             return View(list);
         }

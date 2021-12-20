@@ -11,6 +11,11 @@ namespace RentACarWebSite.Controllers
     [AllowAnonymous]
     public class AjaxController : Controller
     {
+        private readonly RentACarContext _context;
+        public AjaxController(RentACarContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -19,13 +24,15 @@ namespace RentACarWebSite.Controllers
         [HttpPost]
         public JsonResult AjaxMethod(string name,string cardNo)
         {
-            PersonModel person = new PersonModel
+            PaymentModel person = new PaymentModel
             {
                 Name = name,
                 CardNo=cardNo,
                 DateTime = DateTime.Now.ToString()
             };
 
+            _context.PaymentModel.Add(person);
+            _context.SaveChanges();
             return Json(person);
         }
     }

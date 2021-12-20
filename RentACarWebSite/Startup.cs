@@ -18,6 +18,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 
 namespace RentACarWebSite
 {
@@ -74,7 +75,10 @@ namespace RentACarWebSite
                 {
                     x.LoginPath = "/Account/SignInMembers";
                 });
+
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
