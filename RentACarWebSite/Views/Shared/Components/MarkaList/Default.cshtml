@@ -1,9 +1,12 @@
-﻿@model IEnumerable<RentACarWebSite.Models.Marka>
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model IEnumerable<RentACarWebSite.Models.Marka>
 
-<a asp-controller="Cars" asp-action="Index" asp-route-id=0>Tüm arabalar</a>
+
+<a style="margin-bottom: 5px; width: 100%" class="btn btn-outline-info" asp-controller="Cars" asp-action="Index" asp-route-id=0>@localizer["TumArabalar"]</a>
+<br />
 @foreach (var item in Model)
 {
 
-    <a asp-controller="Cars" asp-action="Index" asp-route-id="@item.MarkaId">@item.MarkaName</a>
+    <a style="margin-bottom:5px;width:100%" class="btn btn-outline-info" asp-controller="Cars" asp-action="Index" asp-route-id="@item.MarkaId">@item.MarkaName</a>
     <br />
 }

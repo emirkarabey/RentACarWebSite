@@ -22,7 +22,7 @@ namespace RentACarWebSite.Controllers
             context = ctx;
             _localizer = localizer;
         }
-        // ajaxı tamamla 
+         
         [HttpPost,AllowAnonymous]
         public IActionResult CultureManagement(string culture, string returnUrl)
         {
@@ -136,7 +136,7 @@ namespace RentACarWebSite.Controllers
            
             return View();
         }
-        [HttpPost]/////rol denemesi
+        [HttpPost]
         public IActionResult Create(Cars cars)
         {
            
@@ -181,6 +181,7 @@ namespace RentACarWebSite.Controllers
             return RedirectToAction("Index");
         }
        
+
         public IActionResult CarsList()
         {
             var memberMail = User.Identity.Name;

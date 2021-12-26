@@ -117,28 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CarColor" xml:space="preserve">
-    <value>Renk</value>
+  <data name="Cars" xml:space="preserve">
+    <value>Arabalar</value>
   </data>
-  <data name="CarYear" xml:space="preserve">
-    <value>Yıl</value>
+  <data name="logout" xml:space="preserve">
+    <value>Çıkış Yap</value>
   </data>
-  <data name="FiyatArtan" xml:space="preserve">
-    <value>Artan Fiyat</value>
+  <data name="Rent" xml:space="preserve">
+    <value>Kiralananlar</value>
   </data>
-  <data name="FiyatAzalan" xml:space="preserve">
-    <value>Azalan Fiyat</value>
-  </data>
-  <data name="RentNow" xml:space="preserve">
-    <value>TL/Gün Şimdi Kirala</value>
-  </data>
-  <data name="Seciniz" xml:space="preserve">
-    <value>Seçiniz...</value>
-  </data>
-  <data name="Sirala" xml:space="preserve">
-    <value>Sirala</value>
-  </data>
-  <data name="SubmitBtn" xml:space="preserve">
-    <value>Sırala</value>
+  <data name="Welcome" xml:space="preserve">
+    <value>Hoş Geldin</value>
   </data>
 </root>

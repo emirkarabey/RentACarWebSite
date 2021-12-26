@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit</h1>
+<br />
+<br />
 
 <h4>Cars</h4>
 <hr />
@@ -35,10 +36,10 @@
                 <span asp-validation-for="CarModel" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="CarMarka" class="control-label"></label>
-                <input asp-for="CarMarka" class="form-control" />
-                <span asp-validation-for="CarMarka" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="CarMarka" class="control-label"></label>
+                    <input asp-for="CarMarka" class="form-control" />
+                    <span asp-validation-for="CarMarka" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="CarColor" class="control-label"></label>
                 <input asp-for="CarColor" class="form-control" />
@@ -52,7 +53,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

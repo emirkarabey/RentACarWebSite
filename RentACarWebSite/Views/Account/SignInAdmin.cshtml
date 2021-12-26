@@ -6,12 +6,12 @@
 }
 <link href="~/css/Sign.css" rel="stylesheet" />
 <div id="login">
-    <h3 class="text-center text-white pt-5">Login form</h3>
+    <h3 class="text-center text-white pt-5">Sign In</h3>
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form asp-action="SignInAdmin" >
+                    <form id="login-form" asp-action="SignInAdmin" >
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="AdminMail" class="control-label"></label>

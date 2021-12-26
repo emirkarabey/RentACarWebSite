@@ -25,6 +25,7 @@ namespace RentACarWebSite.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         public IActionResult SignUpMembers()
         {
 
@@ -84,11 +85,14 @@ namespace RentACarWebSite.Controllers
                 return View();
             }
         }
+        [HttpPost,AllowAnonymous]
         public async Task<IActionResult> Register(Members member)
         {
+            member.Rol = "B";
             await context.AddAsync(member);
             await context.SaveChangesAsync();
-            return Redirect("/Home/Index");
+            TempData["value"] = "B";
+            return RedirectToAction("SignInMembers", "Account");
         }
 
         public async Task<IActionResult> Logout()

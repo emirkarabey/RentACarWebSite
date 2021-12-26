@@ -1,5 +1,5 @@
 ﻿
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 <!DOCTYPE html>
 <html>
 
@@ -26,10 +26,10 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CarsList">Cars</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CarsList">@localizer["Cars"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Rent" asp-action="Index">Rent</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Rent" asp-action="Index">@localizer["Rent"]</a>
                     </li>
 
                     <li class="nav-link">
@@ -37,17 +37,17 @@
                     </li>
 
                     <li class="nav-item" style="position:absolute;right:130px">
-                        Welcome @User.Identity.Name
+                        @localizer["Welcome"] @User.Identity.Name
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="btn btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="Logout" style="position:absolute;right:20px">Logout</a>
+                            <a class="btn btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="Logout" style="position:absolute;right:20px">@localizer["logout"]</a>
                         </li>
                     }
 
                 </ul>
-                
+
             </div>
         </nav>
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RentACarWebSite.Controllers
 {
-    [AllowAnonymous]
+    
     public class AjaxController : Controller
     {
         private readonly RentACarContext _context;

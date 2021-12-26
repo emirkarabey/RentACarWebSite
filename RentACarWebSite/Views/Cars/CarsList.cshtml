@@ -22,12 +22,13 @@
 
 }
 
-<h1>CarsList</h1>
+<br />
+<br />
 <h1>@TempData["name"]</h1>
 <div class="form-group">
     <label>@localizer["Sirala"]</label>
     <form asp-controller="Cars" asp-action="Index" method="get">
-        <select class="form-control" name="sirala">
+        <select class="form-control" name="sirala" style="background-color: #ADD8E6">
             <option>@localizer["Seciniz"]</option>
             <option value="Azalan">@localizer["FiyatArtan"]</option>
             <option value="Artan">@localizer["FiyatAzalan"]</option>
@@ -37,7 +38,7 @@
 </div>
 <div class="row">
 
-    <div class="col-2 card" style="width: 150px; height:400px; display: inline-block;">
+    <div class="col-2 card" style="width: 150px; height:600px; display: inline-block;">
 
 
         @await Component.InvokeAsync("MarkaList")
@@ -50,14 +51,16 @@
 
         @foreach (var item in Model)
         {
-            <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px">
+            <div class="card" style=" width: 25%; display: inline-block; box-shadow: 2px 2px 20px grey; margin: 2%; border-radius: 10px;background-color: #ADD8E6">
                 <img class="card-img-top" src=@Html.DisplayFor(modelItem => item.CarFoto)>
                 <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.CarModel)</h5>
                     @*<h5 class="card-title">@Html.DisplayFor(modelItem => item.CarMarka) @Html.DisplayFor(modelItem => item.CarModel)</h5>*@
                     <p class="card-text">
                         @localizer["CarYear"]: @Html.DisplayFor(modelItem => item.CarYear)<br />
                         @localizer["CarColor"]: @Html.DisplayFor(modelItem => item.CarColor)
                     </p>
+
                     <a asp-controller="Rent" asp-action="RentCar" asp-route-id="@item.CarID" class="btn btn-primary">@Html.DisplayFor(modelItem => item.Price) @localizer["RentNow"]</a>
                 </div>
             </div>

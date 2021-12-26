@@ -129,6 +129,9 @@
   <data name="FiyatAzalan" xml:space="preserve">
     <value>Decreasing Price</value>
   </data>
+  <data name="RentNow" xml:space="preserve">
+    <value>TL/Day Rent Now</value>
+  </data>
   <data name="Seciniz" xml:space="preserve">
     <value>Select...</value>
   </data>

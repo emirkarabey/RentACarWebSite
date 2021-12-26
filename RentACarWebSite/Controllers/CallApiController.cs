@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RentACarWebSite.Controllers
 {
-    [AllowAnonymous]
+    
     public class CallApiController : Controller
     {
         private static readonly HttpClient client = new HttpClient();

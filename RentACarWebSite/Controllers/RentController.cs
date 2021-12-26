@@ -42,8 +42,8 @@ namespace RentACarWebSite.Controllers
             context.SaveChanges();
             var car = context.Cars.Find(id);
             TempData["price"] = car.Price.ToString();
-            //context.Cars.Remove(car);
-            //context.SaveChanges();
+            context.Cars.Remove(car);
+            context.SaveChanges();
             return RedirectToAction("Index", "Ajax");
         }
 
